@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bodoconsult.Core.Database.SqlClient", "Bodoconsult.Core.Database.SqlClient\Bodoconsult.Core.Database.SqlClient.csproj", "{543C2A86-A549-4D25-AB1A-C8ABCB83E9EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bodoconsult.Core.Database.SqlClient.Test", "Bodoconsult.Core.Database.SqlClient.Test\Bodoconsult.Core.Database.SqlClient.Test.csproj", "{47E7C0DD-D255-4D98-987C-EA450B4FB79E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{543C2A86-A549-4D25-AB1A-C8ABCB83E9EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{543C2A86-A549-4D25-AB1A-C8ABCB83E9EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{543C2A86-A549-4D25-AB1A-C8ABCB83E9EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{543C2A86-A549-4D25-AB1A-C8ABCB83E9EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47E7C0DD-D255-4D98-987C-EA450B4FB79E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47E7C0DD-D255-4D98-987C-EA450B4FB79E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47E7C0DD-D255-4D98-987C-EA450B4FB79E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47E7C0DD-D255-4D98-987C-EA450B4FB79E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AF32981C-22AE-4427-9B86-C8267D7C7DCF}
+	EndGlobalSection
+EndGlobal
