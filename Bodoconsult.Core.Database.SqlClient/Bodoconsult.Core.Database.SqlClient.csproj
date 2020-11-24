@@ -7,20 +7,20 @@
     <RepositoryUrl>https://github.com/RobertLeisner/Bodoconsult.Core.Database.SqlClient</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageId>Bodoconsult.Core.Database.SqlClient</PackageId>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <Authors>Robert Leisner</Authors>
     <Company>Bodoconsult EDV-Dienstleistungen GmbH</Company>
     <RepositoryType>git</RepositoryType>
     <PackageTags>System.Data Datatable SQL exec SqlServer sqlclient</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>Simple .NET database layer for Microsoft(r) SqlServer(r) or LocalDb based on System.Data intended for mainly read-only data access i.e. for reporting purposes</Description>
-    <PackageReleaseNotes>First draft after migration from Bodoconsult.Core.Database</PackageReleaseNotes>
+    <PackageReleaseNotes>Added metadata infrastructure for creating entities, mappings and service classes.</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/RobertLeisner/Bodoconsult.Core.Database.SqlClient</PackageProjectUrl>
 
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Bodoconsult.Core.Database" Version="1.0.5" />
+    <PackageReference Include="Bodoconsult.Core.Database" Version="1.0.6" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
   </ItemGroup>
 

@@ -11,7 +11,7 @@ namespace Bodoconsult.Core.Database.SqlClient.Test
     public class TestsSqlClientConnManager
     {
 
-        private readonly string _connectionString = TestHelper.SqlServerString;
+        private readonly string _connectionString = TestHelper.SqlServerConnectionString;
 
 
         private IConnManager _db;

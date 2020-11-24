@@ -7,6 +7,6 @@ namespace Bodoconsult.Core.Database.SqlClient.Test.Helpers
         /// <summary>
         /// Connection string to postgress db. Adjust path to your connectionstring file
         /// </summary>
-        public static string SqlServerString => File.ReadAllText(@"D:\Daten\Projekte\_work\Data\sqlserver.txt");
+        public static string SqlServerConnectionString => File.ReadAllText(@"D:\Daten\Projekte\_work\Data\sqlserver.txt");
     }
 }
