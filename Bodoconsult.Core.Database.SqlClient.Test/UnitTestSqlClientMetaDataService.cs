@@ -197,6 +197,29 @@ namespace Bodoconsult.Core.Database.SqlClient.Test
         }
 
 
+        [Test]
+        public void TestCreateDeleteEntityCommand()
+        {
+            // Assert
+            Assert.IsNull(_service.Table);
+
+            _service.GetMetaData(_conn, EntityName, Sql, PrimaryKeyField);
+
+            Assert.IsNotNull(_service.Table);
+
+            Assert.AreEqual(EntityName, _service.Table.Name);
+
+            Assert.IsTrue(_service.Table.Fields.Any());
+
+            // Act
+            var result = _service.CreateDeleteEntityCommand();
+
+            // Assert
+            Assert.IsFalse(string.IsNullOrEmpty(result));
+
+            Debug.Print(result);
+        }
+
 
         [Test]
         public void TestCreateEntityServiceClass()

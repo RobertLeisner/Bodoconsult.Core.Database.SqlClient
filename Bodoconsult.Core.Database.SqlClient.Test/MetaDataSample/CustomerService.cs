@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace Bodoconsult.Core.Database.SqlClient.Test.MetaDataSample
@@ -28,55 +29,55 @@ namespace Bodoconsult.Core.Database.SqlClient.Test.MetaDataSample
 			SqlParameter p;
 
 			// Parameter @CustomerId
-			p = new SqlParameter("@CustomerId", "System.Data.SqlTypes.SqlInt32") { Value = item.CustomerId };
+			p = new SqlParameter("@CustomerId", SqlDbType.Int) { Value = item.CustomerId };
 			cmd.Parameters.Add(p);
 
 			// Parameter @FirstName
-			p = new SqlParameter("@FirstName", "System.Data.SqlTypes.SqlString") { Value = item.FirstName };
+			p = new SqlParameter("@FirstName", SqlDbType.NVarChar) { Value = item.FirstName };
 			cmd.Parameters.Add(p);
 
 			// Parameter @LastName
-			p = new SqlParameter("@LastName", "System.Data.SqlTypes.SqlString") { Value = item.LastName };
+			p = new SqlParameter("@LastName", SqlDbType.NVarChar) { Value = item.LastName };
 			cmd.Parameters.Add(p);
 
 			// Parameter @Company
-			p = new SqlParameter("@Company", "System.Data.SqlTypes.SqlString") { Value = item.Company };
+			p = new SqlParameter("@Company", SqlDbType.NVarChar) { Value = item.Company };
 			cmd.Parameters.Add(p);
 
 			// Parameter @Address
-			p = new SqlParameter("@Address", "System.Data.SqlTypes.SqlString") { Value = item.Address };
+			p = new SqlParameter("@Address", SqlDbType.NVarChar) { Value = item.Address };
 			cmd.Parameters.Add(p);
 
 			// Parameter @City
-			p = new SqlParameter("@City", "System.Data.SqlTypes.SqlString") { Value = item.City };
+			p = new SqlParameter("@City", SqlDbType.NVarChar) { Value = item.City };
 			cmd.Parameters.Add(p);
 
 			// Parameter @State
-			p = new SqlParameter("@State", "System.Data.SqlTypes.SqlString") { Value = item.State };
+			p = new SqlParameter("@State", SqlDbType.NVarChar) { Value = item.State };
 			cmd.Parameters.Add(p);
 
 			// Parameter @Country
-			p = new SqlParameter("@Country", "System.Data.SqlTypes.SqlString") { Value = item.Country };
+			p = new SqlParameter("@Country", SqlDbType.NVarChar) { Value = item.Country };
 			cmd.Parameters.Add(p);
 
 			// Parameter @PostalCode
-			p = new SqlParameter("@PostalCode", "System.Data.SqlTypes.SqlString") { Value = item.PostalCode };
+			p = new SqlParameter("@PostalCode", SqlDbType.NVarChar) { Value = item.PostalCode };
 			cmd.Parameters.Add(p);
 
 			// Parameter @Phone
-			p = new SqlParameter("@Phone", "System.Data.SqlTypes.SqlString") { Value = item.Phone };
+			p = new SqlParameter("@Phone", SqlDbType.NVarChar) { Value = item.Phone };
 			cmd.Parameters.Add(p);
 
 			// Parameter @Fax
-			p = new SqlParameter("@Fax", "System.Data.SqlTypes.SqlString") { Value = item.Fax };
+			p = new SqlParameter("@Fax", SqlDbType.NVarChar) { Value = item.Fax };
 			cmd.Parameters.Add(p);
 
 			// Parameter @Email
-			p = new SqlParameter("@Email", "System.Data.SqlTypes.SqlString") { Value = item.Email };
+			p = new SqlParameter("@Email", SqlDbType.NVarChar) { Value = item.Email };
 			cmd.Parameters.Add(p);
 
 			// Parameter @SupportRepId
-			p = new SqlParameter("@SupportRepId", "System.Data.SqlTypes.SqlInt32") { Value = item.SupportRepId };
+			p = new SqlParameter("@SupportRepId", SqlDbType.Int) { Value = item.SupportRepId };
 			cmd.Parameters.Add(p);
 
 			_db.Exec(cmd);
@@ -89,62 +90,77 @@ namespace Bodoconsult.Core.Database.SqlClient.Test.MetaDataSample
 		public void Update(Customer item)
 		{
 
-			const string sql = "UPDATE [Customer] SET [CustomerId]=@CustomerId, [FirstName]=@FirstName, [LastName]=@LastName, [Company]=@Company, [Address]=@Address, [City]=@City, [State]=@State, [Country]=@Country, [PostalCode]=@PostalCode, [Phone]=@Phone, [Fax]=@Fax, [Email]=@Email, [SupportRepId]=@SupportRepId WHERE \"CustomerId\"=@CustomerId; ";
+			const string sql = "UPDATE [Customer] SET [FirstName]=@FirstName, [LastName]=@LastName, [Company]=@Company, [Address]=@Address, [City]=@City, [State]=@State, [Country]=@Country, [PostalCode]=@PostalCode, [Phone]=@Phone, [Fax]=@Fax, [Email]=@Email, [SupportRepId]=@SupportRepId WHERE \"CustomerId\"=@CustomerId; ";
 
 			var cmd = new SqlCommand(sql);
 
 			SqlParameter p;
 
 			// Parameter @CustomerId
-			p = new SqlParameter("@CustomerId", "System.Data.SqlTypes.SqlInt32") { Value = item.CustomerId };
+			p = new SqlParameter("@CustomerId", SqlDbType.Int) { Value = item.CustomerId };
 			cmd.Parameters.Add(p);
 
 			// Parameter @FirstName
-			p = new SqlParameter("@FirstName", "System.Data.SqlTypes.SqlString") { Value = item.FirstName };
+			p = new SqlParameter("@FirstName", SqlDbType.NVarChar) { Value = item.FirstName };
 			cmd.Parameters.Add(p);
 
 			// Parameter @LastName
-			p = new SqlParameter("@LastName", "System.Data.SqlTypes.SqlString") { Value = item.LastName };
+			p = new SqlParameter("@LastName", SqlDbType.NVarChar) { Value = item.LastName };
 			cmd.Parameters.Add(p);
 
 			// Parameter @Company
-			p = new SqlParameter("@Company", "System.Data.SqlTypes.SqlString") { Value = item.Company };
+			p = new SqlParameter("@Company", SqlDbType.NVarChar) { Value = item.Company };
 			cmd.Parameters.Add(p);
 
 			// Parameter @Address
-			p = new SqlParameter("@Address", "System.Data.SqlTypes.SqlString") { Value = item.Address };
+			p = new SqlParameter("@Address", SqlDbType.NVarChar) { Value = item.Address };
 			cmd.Parameters.Add(p);
 
 			// Parameter @City
-			p = new SqlParameter("@City", "System.Data.SqlTypes.SqlString") { Value = item.City };
+			p = new SqlParameter("@City", SqlDbType.NVarChar) { Value = item.City };
 			cmd.Parameters.Add(p);
 
 			// Parameter @State
-			p = new SqlParameter("@State", "System.Data.SqlTypes.SqlString") { Value = item.State };
+			p = new SqlParameter("@State", SqlDbType.NVarChar) { Value = item.State };
 			cmd.Parameters.Add(p);
 
 			// Parameter @Country
-			p = new SqlParameter("@Country", "System.Data.SqlTypes.SqlString") { Value = item.Country };
+			p = new SqlParameter("@Country", SqlDbType.NVarChar) { Value = item.Country };
 			cmd.Parameters.Add(p);
 
 			// Parameter @PostalCode
-			p = new SqlParameter("@PostalCode", "System.Data.SqlTypes.SqlString") { Value = item.PostalCode };
+			p = new SqlParameter("@PostalCode", SqlDbType.NVarChar) { Value = item.PostalCode };
 			cmd.Parameters.Add(p);
 
 			// Parameter @Phone
-			p = new SqlParameter("@Phone", "System.Data.SqlTypes.SqlString") { Value = item.Phone };
+			p = new SqlParameter("@Phone", SqlDbType.NVarChar) { Value = item.Phone };
 			cmd.Parameters.Add(p);
 
 			// Parameter @Fax
-			p = new SqlParameter("@Fax", "System.Data.SqlTypes.SqlString") { Value = item.Fax };
+			p = new SqlParameter("@Fax", SqlDbType.NVarChar) { Value = item.Fax };
 			cmd.Parameters.Add(p);
 
 			// Parameter @Email
-			p = new SqlParameter("@Email", "System.Data.SqlTypes.SqlString") { Value = item.Email };
+			p = new SqlParameter("@Email", SqlDbType.NVarChar) { Value = item.Email };
 			cmd.Parameters.Add(p);
 
 			// Parameter @SupportRepId
-			p = new SqlParameter("@SupportRepId", "System.Data.SqlTypes.SqlInt32") { Value = item.SupportRepId };
+			p = new SqlParameter("@SupportRepId", SqlDbType.Int) { Value = item.SupportRepId };
+			cmd.Parameters.Add(p);
+
+			_db.Exec(cmd);
+
+		}
+
+		/// <summary>
+		/// Delete a row from table Customer 
+		/// </summary>
+		public void Delete(System.Int32 customerId)
+		{
+
+			var cmd = new SqlCommand("DELETE FROM [Customer] WHERE [CustomerId] = @PK");
+
+			var p = new SqlParameter("@PK", SqlDbType.Int) { Value = customerId };
 			cmd.Parameters.Add(p);
 
 			_db.Exec(cmd);
@@ -159,7 +175,7 @@ namespace Bodoconsult.Core.Database.SqlClient.Test.MetaDataSample
 
 			var result = new List<Customer>();
 
-			var reader = _db.GetDataReader("SELECT * FROM \"Customer\"");
+			var reader = _db.GetDataReader("SELECT * FROM [Customer]");
 
 			while (reader.Read())
 			{
@@ -181,7 +197,7 @@ namespace Bodoconsult.Core.Database.SqlClient.Test.MetaDataSample
 
 			Customer dto = null;
 
-			var reader = _db.GetDataReader($"SELECT * FROM \"Customer\" WHERE \"CustomerId\"={pkCustomerId};");
+			var reader = _db.GetDataReader($"SELECT * FROM [Customer] WHERE [CustomerId]={pkCustomerId};");
 
 			while (reader.Read())
 			{
@@ -201,12 +217,11 @@ namespace Bodoconsult.Core.Database.SqlClient.Test.MetaDataSample
 		public int Count()
 		{
 
-			var result = _db.ExecWithResult("SELECT COUNT(*) FROM \"Customer\"");
+			var result = _db.ExecWithResult("SELECT COUNT(*) FROM [Customer]");
 
 			return Convert.ToInt32(result);
 		}
 
 
 	}
-
 }

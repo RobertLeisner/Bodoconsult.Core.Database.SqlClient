@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
@@ -14,13 +15,13 @@ namespace Bodoconsult.Core.Database.SqlClient.MetaData
     public class SqlClientMetaDataService : BaseMetaDataService
     {
 
-        ///// <summary>
-        ///// Default ctor
-        ///// </summary>
-        //public SqlClientMetaDataService()
-        //{
-        //    ConnManagerName = "SqlClientConnManager";
-        //}
+        /// <summary>
+        /// Default ctor
+        /// </summary>
+        public SqlClientMetaDataService()
+        {
+            ConnManagerName = "SqlClientConnManager";
+        }
 
         /// <summary>
         /// Get meta data from a SQL statement
@@ -196,6 +197,66 @@ namespace Bodoconsult.Core.Database.SqlClient.MetaData
         }
 
 
+        private static string GetFieldTypeFromType(Type type)
+        {
+            var result = "";
+
+            switch (type.Name.ToLowerInvariant())
+            {
+                case "byte":
+                    result = "SqlDbType.TinyInt";
+                    break;
+                case "int16":
+                    result = "SqlDbType.SmallInt";
+                    break;
+                case "short":
+                case "int32":
+                    result = "SqlDbType.Int";
+                    break;
+                case "long":
+                case "int64":
+                    result = "SqlDbType.BigInt";
+                    break;
+                case "uint16":
+                    result = "SqlDbType.SmallInt";
+                    break;
+                case "uint32":
+                    result = "SqlDbType.Int";
+                    break;
+                case "uint64":
+                    result = "SqlDbType.BigInt";
+                    break;
+                case "single":
+                    result = "SqlDbType.Real";
+                    break;
+                case "float":
+                case "double":
+                    result = "SqlDbType.Double";
+                    break;
+                case "currency":
+                    result = "SqlDbType.Decimal";
+                    break;
+                case "decimal":
+                    result = "SqlDbType.Decimal";
+                    break;
+                case "bool":
+                case "boolean":
+                    result = "SqlDbType.Bit";
+                    break;
+                case "datetime":
+                    result = "SqlDbType.DateTime";
+                    break;
+                case "string":
+                    result = "SqlDbType.NVarChar";
+                    break;
+                default:
+                    break;
+            }
+
+            return result;
+        }
+
+
         private static string GetFieldMappingFromDb(MetaDataField field, int index)
         {
             var fieldName = field.Name.Substring(0, 1).ToUpper() +
@@ -288,8 +349,8 @@ namespace Bodoconsult.Core.Database.SqlClient.MetaData
             var erg = new StringBuilder();
 
             erg.AppendLine($"// Parameter @{field.Name}");
-            erg.AppendLine($"p = new SqlParameter(\"@{field.Name}\", \"{field.SourceDataType}\") {{ Value = item.{field.Name} }};");
-            erg.AppendLine($"cmd.Parameters.Add(p); ");
+            erg.AppendLine($"p = new SqlParameter(\"@{field.Name}\", {GetFieldTypeFromType(field.DatabaseType)}) {{ Value = item.{field.Name} }};");
+            erg.AppendLine("cmd.Parameters.Add(p); ");
             erg.AppendLine("");
 
             return erg;
@@ -357,7 +418,7 @@ namespace Bodoconsult.Core.Database.SqlClient.MetaData
             result.Append(fieldData.Substring(0, fieldData.Length - 2));
             result.Append(") \"+ \r\n");
 
-            result.Append($"\t\t\"VALUES (");
+            result.Append("\t\t\"VALUES (");
 
 
             // Parameter list
@@ -415,6 +476,7 @@ namespace Bodoconsult.Core.Database.SqlClient.MetaData
 
             foreach (var field in Table.Fields)
             {
+                if (field.IsPrimaryKey) continue;
                 fieldData += $"[{field.Name}]=@{field.Name}, ";
             }
 
@@ -432,23 +494,6 @@ namespace Bodoconsult.Core.Database.SqlClient.MetaData
                 result.Append(" \";\r\n");
             }
 
-
-
-
-            //result.Append($"\t\t\"VALUES (");
-
-
-            //// Parameter list
-            //fieldData = "";
-
-            //foreach (var field in table.Fields)
-            //{
-            //    fieldData += "@" + field.Name + ", ";
-            //}
-
-            //result.Append(fieldData.Substring(0, fieldData.Length - 2));
-            //result.Append(")\";\r\n");
-
             result.AppendLine("");
             result.AppendLine("var cmd = new SqlCommand(sql);");
             result.AppendLine("");
@@ -461,7 +506,6 @@ namespace Bodoconsult.Core.Database.SqlClient.MetaData
             foreach (var field in Table.Fields)
             {
                 result.Append(GetFieldParameter(field));
-
             }
 
             result.AppendLine("_db.Exec(cmd);");
@@ -499,7 +543,7 @@ namespace Bodoconsult.Core.Database.SqlClient.MetaData
             result.AppendLine("");
             result.AppendLine($"var result = new List<{Table.DtoName}>();");
             result.AppendLine("");
-            result.AppendLine($"var reader = _db.GetDataReader(\"SELECT * FROM \\\"{Table.Name}\\\"\"); ");
+            result.AppendLine($"var reader = _db.GetDataReader(\"SELECT * FROM [{Table.Name}]\"); ");
             result.AppendLine("");
             result.AppendLine("while (reader.Read())");
             result.AppendLine("{");
@@ -527,11 +571,11 @@ namespace Bodoconsult.Core.Database.SqlClient.MetaData
             var result = new StringBuilder();
 
             result.AppendLine($"/// <summary>\r\n/// Count all rows in table {Table.Name} \r\n/// </summary>");
-            result.AppendLine($"public int Count()");
+            result.AppendLine("public int Count()");
             result.AppendLine("{");
 
             result.AppendLine("");
-            result.AppendLine($"var result = _db.ExecWithResult(\"SELECT COUNT(*) FROM \\\"{Table.Name}\\\"\"); ");
+            result.AppendLine($"var result = _db.ExecWithResult(\"SELECT COUNT(*) FROM [{Table.Name}]\"); ");
             result.AppendLine("");
             result.AppendLine("return Convert.ToInt32(result);");
 
@@ -558,7 +602,7 @@ namespace Bodoconsult.Core.Database.SqlClient.MetaData
             result.AppendLine("");
             result.AppendLine($"{Table.DtoName} dto = null;");
             result.AppendLine("");
-            result.AppendLine($"var reader = _db.GetDataReader($\"SELECT * FROM \\\"{Table.Name}\\\" WHERE \\\"{pk.Name}\\\"={{pk{pk.Name}}};\"); ");
+            result.AppendLine($"var reader = _db.GetDataReader($\"SELECT * FROM [{Table.Name}] WHERE [{pk.Name}]={{pk{pk.Name}}};\"); ");
             result.AppendLine("");
             result.AppendLine("while (reader.Read())");
             result.AppendLine("{");
@@ -577,44 +621,44 @@ namespace Bodoconsult.Core.Database.SqlClient.MetaData
             return result.ToString();
         }
 
-        /// <summary>
-        /// Creates a service class for the entity
-        /// </summary>
-        /// <returns>string with class code</returns>
-        public override string CreateEntityServiceClass()
-        {
-            var result = new StringBuilder();
+        ///// <summary>
+        ///// Creates a service class for the entity
+        ///// </summary>
+        ///// <returns>string with class code</returns>
+        //public override string CreateEntityServiceClass()
+        //{
+        //    var result = new StringBuilder();
 
 
-            result.AppendLine($"public class {Table.DtoName}Service");
-            result.AppendLine("{");
+        //    result.AppendLine($"public class {Table.DtoName}Service");
+        //    result.AppendLine("{");
 
-            result.AppendLine("");
-            result.AppendLine("private readonly IConnManager _db;");
-            result.AppendLine("");
+        //    result.AppendLine("");
+        //    result.AppendLine("private readonly IConnManager _db;");
+        //    result.AppendLine("");
 
-            result.AppendLine($"public {Table.DtoName}Service(string connectionString)");
-            result.AppendLine("{");
-            result.AppendLine("_db = new SqlClientConnManager(connectionString);");
+        //    result.AppendLine($"public {Table.DtoName}Service(string connectionString)");
+        //    result.AppendLine("{");
+        //    result.AppendLine("_db = new SqlClientConnManager(connectionString);");
 
-            result.AppendLine("}");
-            result.AppendLine("");
+        //    result.AppendLine("}");
+        //    result.AppendLine("");
 
-            result.AppendLine(CreateNewEntityCommand());
+        //    result.AppendLine(CreateNewEntityCommand());
 
-            result.AppendLine(CreateUpdateEntityCommand());
+        //    result.AppendLine(CreateUpdateEntityCommand());
 
-            result.AppendLine(CreateGetAllEntitiesCommand());
+        //    result.AppendLine(CreateGetAllEntitiesCommand());
 
-            result.AppendLine(CreateGetByIdCommand());
+        //    result.AppendLine(CreateGetByIdCommand());
 
-            result.AppendLine(CreateCountCommand());
+        //    result.AppendLine(CreateCountCommand());
 
-            result.AppendLine("");
-            result.AppendLine("}");
+        //    result.AppendLine("");
+        //    result.AppendLine("}");
 
-            return result.ToString();
-        }
+        //    return result.ToString();
+        //}
 
         /// <summary>
         /// Creates a method to delete an entity from the database by its ID
@@ -622,7 +666,32 @@ namespace Bodoconsult.Core.Database.SqlClient.MetaData
         /// <returns>string with the method code</returns>
         public override string CreateDeleteEntityCommand()
         {
-            throw new NotImplementedException();
+            var result = new StringBuilder();
+
+            var pk = Table.Fields.FirstOrDefault(x => x.IsPrimaryKey);
+            if (pk == null)
+            {
+                result.AppendLine("// No primary key field defined for method GetById");
+                return result.ToString();
+            }
+
+            var paraName = pk.Name.Substring(0, 1).ToLowerInvariant() + pk.Name.Substring(1);
+
+            result.AppendLine($"/// <summary>\r\n/// Delete a row from table {Table.Name} \r\n/// </summary>");
+            result.AppendLine($"public void Delete({pk.DatabaseType} {paraName})");
+            result.AppendLine("{");
+            result.AppendLine("");
+            result.AppendLine($"\tvar cmd = new SqlCommand(\"DELETE FROM [{Table.Name}] WHERE [{pk.Name}] = @PK\");");
+            result.AppendLine("");
+            result.AppendLine($"\tvar p = new SqlParameter(\"@PK\", {GetFieldTypeFromType(pk.DatabaseType)}) {{Value = {paraName}}};");
+            result.AppendLine("\tcmd.Parameters.Add(p);");
+            result.AppendLine("");
+            result.AppendLine("\t_db.Exec(cmd);");
+            result.AppendLine("");
+            result.AppendLine("}");
+
+
+            return result.ToString();
         }
 
     }
