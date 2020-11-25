@@ -1,4 +1,5 @@
-﻿using System.Data.Common;
+﻿using System;
+using System.Data.Common;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -613,6 +614,15 @@ namespace Bodoconsult.Core.Database.SqlClient.MetaData
             result.AppendLine("}");
 
             return result.ToString();
+        }
+
+        /// <summary>
+        /// Creates a method to delete an entity from the database by its ID
+        /// </summary>
+        /// <returns>string with the method code</returns>
+        public override string CreateDeleteEntityCommand()
+        {
+            throw new NotImplementedException();
         }
 
     }
