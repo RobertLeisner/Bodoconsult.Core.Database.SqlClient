@@ -21,7 +21,10 @@ namespace Bodoconsult.Core.Database.SqlClient
             
             ConnectionString = connectionString;
 
-            if (!ConnectionString.ToLower().Contains("connect timeout")) ConnectionString += "; Connect timeout=3000";
+            if (!ConnectionString.ToLower().Contains("connect timeout"))
+            {
+                ConnectionString += "; Connect timeout=3000";
+            }
         }
 
 
@@ -35,7 +38,10 @@ namespace Bodoconsult.Core.Database.SqlClient
             {
                 using (var conn = new SqlConnection(ConnectionString))
                 {
-                    if (SendStatus!=null) conn.InfoMessage += ConnOnInfoMessage;
+                    if (SendStatus != null)
+                    {
+                        conn.InfoMessage += ConnOnInfoMessage;
+                    }
                     conn.Open();
                     conn.Close();
                 }
@@ -83,7 +89,10 @@ namespace Bodoconsult.Core.Database.SqlClient
         public override DataAdapter GetDataAdapter(string sql)
         {
             var conn = new SqlConnection(ConnectionString);
-            if (SendStatus != null) conn.InfoMessage += ConnOnInfoMessage;
+            if (SendStatus != null)
+            {
+                conn.InfoMessage += ConnOnInfoMessage;
+            }
             return new SqlDataAdapter(sql, conn);
         }
 
@@ -119,11 +128,16 @@ namespace Bodoconsult.Core.Database.SqlClient
             try
             {
                 var conn = new SqlConnection(ConnectionString);
-                if (SendStatus != null) conn.InfoMessage += ConnOnInfoMessage;
+                if (SendStatus != null)
+                {
+                    conn.InfoMessage += ConnOnInfoMessage;
+                }
                 conn.Open();
                 var cmd = new SqlCommand(sql, conn);
                 if (_commandTimeOut != -1)
+                {
                     cmd.CommandTimeout = _commandTimeOut;
+                }
                 var dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
                 return dr;
             }
@@ -144,11 +158,16 @@ namespace Bodoconsult.Core.Database.SqlClient
             try
             {
                 var conn = new SqlConnection(ConnectionString);
-                if (SendStatus != null) conn.InfoMessage += ConnOnInfoMessage;
+                if (SendStatus != null)
+                {
+                    conn.InfoMessage += ConnOnInfoMessage;
+                }
                 conn.Open();
                 var cmd = new SqlCommand(sql, conn);
                 if (_commandTimeOut != -1)
+                {
                     cmd.CommandTimeout = _commandTimeOut;
+                }
                 var reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
                 var dt = new DataTable();
                 dt.BeginLoadData();
@@ -174,10 +193,15 @@ namespace Bodoconsult.Core.Database.SqlClient
             {
                 using (var conn = new SqlConnection(ConnectionString))
                 {
-                    if (SendStatus != null) conn.InfoMessage += ConnOnInfoMessage;
+                    if (SendStatus != null)
+                    {
+                        conn.InfoMessage += ConnOnInfoMessage;
+                    }
                     var cmd = new SqlCommand(sql, conn);
                     if (_commandTimeOut != -1)
+                    {
                         cmd.CommandTimeout = _commandTimeOut;
+                    }
                     cmd.Connection.Open();
                     var reader = cmd.ExecuteReader();
                     if (reader.HasRows)
@@ -210,10 +234,15 @@ namespace Bodoconsult.Core.Database.SqlClient
             {
                 using (var conn = new SqlConnection(ConnectionString))
                 {
-                    if (SendStatus != null) conn.InfoMessage += ConnOnInfoMessage;
+                    if (SendStatus != null)
+                    {
+                        conn.InfoMessage += ConnOnInfoMessage;
+                    }
                     var cmd = new SqlCommand(sql, conn);
                     if (_commandTimeOut != -1)
+                    {
                         cmd.CommandTimeout = _commandTimeOut;
+                    }
                     cmd.Connection.Open();
                     var value = cmd.ExecuteScalar();
                     conn.Close();
@@ -242,10 +271,15 @@ namespace Bodoconsult.Core.Database.SqlClient
             {
                 using (var conn = new SqlConnection(ConnectionString))
                 {
-                    if (SendStatus != null) conn.InfoMessage += ConnOnInfoMessage;
+                    if (SendStatus != null)
+                    {
+                        conn.InfoMessage += ConnOnInfoMessage;
+                    }
                     cmd.Connection = conn;
                     if (_commandTimeOut != -1)
+                    {
                         cmd.CommandTimeout = _commandTimeOut;
+                    }
                     cmd.Connection.Open();
                     var value = cmd.ExecuteScalar();
                     conn.Close();
@@ -272,10 +306,15 @@ namespace Bodoconsult.Core.Database.SqlClient
             {
                 using (var conn = new SqlConnection(ConnectionString))
                 {
-                    if (SendStatus != null) conn.InfoMessage += ConnOnInfoMessage;
+                    if (SendStatus != null)
+                    {
+                        conn.InfoMessage += ConnOnInfoMessage;
+                    }
                     cmd.Connection = conn;
                     if (_commandTimeOut != -1)
+                    {
                         cmd.CommandTimeout = _commandTimeOut;
+                    }
              
                     cmd.Connection.Open();
 
@@ -319,10 +358,15 @@ namespace Bodoconsult.Core.Database.SqlClient
                 var p = new SqlParameter("Test", SqlDbType.BigInt);
 
                 var conn = new SqlConnection(ConnectionString);
-                if (SendStatus != null) conn.InfoMessage += ConnOnInfoMessage;
+                if (SendStatus != null)
+                {
+                    conn.InfoMessage += ConnOnInfoMessage;
+                }
                 cmd.Connection = conn;
                 if (_commandTimeOut != -1)
+                {
                     cmd.CommandTimeout = _commandTimeOut;
+                }
                 cmd.Connection.Open();
                 var dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
                 return dr;
@@ -345,10 +389,15 @@ namespace Bodoconsult.Core.Database.SqlClient
             {
                 using (var conn = new SqlConnection(ConnectionString))
                 {
-                    if (SendStatus != null) conn.InfoMessage += ConnOnInfoMessage;
+                    if (SendStatus != null)
+                    {
+                        conn.InfoMessage += ConnOnInfoMessage;
+                    }
                     cmd.Connection = conn;
                     if (_commandTimeOut != -1)
+                    {
                         cmd.CommandTimeout = _commandTimeOut;
+                    }
                     cmd.Connection.Open();
                     //cmd.ExecuteNonQuery();
                     cmd.ExecuteScalar();
@@ -374,10 +423,15 @@ namespace Bodoconsult.Core.Database.SqlClient
                 var cs = ConnectionString + ";Asynchronous Processing=true;";
                 using (_connection = new SqlConnection(cs))
                 {
-                    if (SendStatus != null) _connection.InfoMessage += ConnOnInfoMessage;
+                    if (SendStatus != null)
+                    {
+                        _connection.InfoMessage += ConnOnInfoMessage;
+                    }
                     cmd.Connection = _connection;
                     if (_commandTimeOut != -1)
+                    {
                         cmd.CommandTimeout = _commandTimeOut;
+                    }
                     cmd.Connection.Open();
 
                     //var callback = new AsyncCallback(HandleCallback);
@@ -420,10 +474,15 @@ namespace Bodoconsult.Core.Database.SqlClient
                     var cs = ConnectionString + ";Asynchronous Processing=true;";
                     using (_connection = new SqlConnection(cs))
                     {
-                        if (SendStatus != null) _connection.InfoMessage += ConnOnInfoMessage;
+                        if (SendStatus != null)
+                        {
+                            _connection.InfoMessage += ConnOnInfoMessage;
+                        }
                         var cmd = new SqlCommand(sql, _connection);
                         if (_commandTimeOut != -1)
+                        {
                             cmd.CommandTimeout = _commandTimeOut;
+                        }
                         cmd.Connection.Open();
 
                         var callback = new AsyncCallback(HandleCallback);
@@ -436,10 +495,15 @@ namespace Bodoconsult.Core.Database.SqlClient
                 {
                     using (var conn = new SqlConnection(ConnectionString))
                     {
-                        if (SendStatus != null) conn.InfoMessage += ConnOnInfoMessage;
+                        if (SendStatus != null)
+                        {
+                            conn.InfoMessage += ConnOnInfoMessage;
+                        }
                         var cmd = new SqlCommand(sql, conn);
                         if (_commandTimeOut != -1)
+                        {
                             cmd.CommandTimeout = _commandTimeOut;
+                        }
                         cmd.Connection.Open();
                         cmd.ExecuteNonQuery();
                         conn.Close();
@@ -469,16 +533,27 @@ namespace Bodoconsult.Core.Database.SqlClient
             {
                 using (var conn = new SqlConnection(ConnectionString))
                 {
-                    if (SendStatus != null) conn.InfoMessage += ConnOnInfoMessage;
+                    if (SendStatus != null)
+                    {
+                        conn.InfoMessage += ConnOnInfoMessage;
+                    }
 
                     conn.Open();
 
                     for (index = 0; index < commands.Count; index++)
                     {
+
+                        if (index % NotifyProgressSteps == 0)
+                        {
+                            NotifyProgress?.Invoke(index);
+                        }
+
                         var cmd = commands[index];
                         cmd.Connection = conn;
                         if (_commandTimeOut != -1)
+                        {
                             cmd.CommandTimeout = _commandTimeOut;
+                        }
                         //cmd.Connection.Open();
                         //cmd.ExecuteNonQuery();
                         cmd.ExecuteScalar();
@@ -506,7 +581,10 @@ namespace Bodoconsult.Core.Database.SqlClient
             {
                 var command = (SqlCommand)result.AsyncState;
                 command.EndExecuteNonQuery(result);
-                if (_connection == null) return;
+                if (_connection == null)
+                {
+                    return;
+                }
                 try
                 {
                     _connection.Close();
@@ -561,7 +639,10 @@ namespace Bodoconsult.Core.Database.SqlClient
 
             var sucess = Enum.TryParse(t, out SqlDbType sqlDataType);
 
-            if (sucess) return sqlDataType;
+            if (sucess)
+            {
+                return sqlDataType;
+            }
 
             throw new ArgumentException($"Type not implemented: {dataType}");
         }

@@ -70,7 +70,10 @@ namespace Bodoconsult.Core.Database.SqlClient.MetaData
 
                 //Debug.Print(colItem.SourceDataType);
 
-                if (col.ColumnSize != null) colItem.MaxLength = (int)col.ColumnSize;
+                if (col.ColumnSize != null)
+                {
+                    colItem.MaxLength = (int)col.ColumnSize;
+                }
 
                 table.Fields.Add(colItem);
             }
@@ -476,7 +479,10 @@ namespace Bodoconsult.Core.Database.SqlClient.MetaData
 
             foreach (var field in Table.Fields)
             {
-                if (field.IsPrimaryKey) continue;
+                if (field.IsPrimaryKey)
+                {
+                    continue;
+                }
                 fieldData += $"[{field.Name}]=@{field.Name}, ";
             }
 
