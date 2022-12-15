@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH. All rights reserved.
+
+using System;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace Bodoconsult.Core.Database.SqlClient.Test.MetaDataSample
 {

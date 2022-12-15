@@ -1,8 +1,10 @@
+// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH. All rights reserved.
+
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
-using System.Data.SqlClient;
 using Bodoconsult.Core.Database.SqlClient.Test.Helpers;
+using Microsoft.Data.SqlClient;
 using NUnit.Framework;
 
 namespace Bodoconsult.Core.Database.SqlClient.Test

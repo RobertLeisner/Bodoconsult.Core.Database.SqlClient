@@ -1,11 +1,13 @@
-﻿using System;
-using System.Data;
+﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH. All rights reserved.
+
+
+using System;
 using System.Data.Common;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using Bodoconsult.Core.Database.MetaData;
 using Bodoconsult.Core.Database.MetaData.Model;
+using Microsoft.Data.SqlClient;
 
 namespace Bodoconsult.Core.Database.SqlClient.MetaData
 {

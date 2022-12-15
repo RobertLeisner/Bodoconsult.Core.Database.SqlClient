@@ -1,4 +1,6 @@
-﻿using System.Data;
+﻿// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH. All rights reserved.
+
+using System.Data;
 
 namespace Bodoconsult.Core.Database.SqlClient.Test.MetaDataSample
 {

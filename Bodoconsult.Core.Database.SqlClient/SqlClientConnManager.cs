@@ -1,8 +1,10 @@
+// Copyright (c) Bodoconsult EDV-Dienstleistungen GmbH. All rights reserved.
+
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 
 namespace Bodoconsult.Core.Database.SqlClient
 {
@@ -104,7 +106,7 @@ namespace Bodoconsult.Core.Database.SqlClient
         /// <returns>A <see cref="DataAdapter"/> object with data</returns>   
         public override DataAdapter GetDataAdapter(DbCommand cmd)
         {
-            if (!(cmd is SqlCommand))
+            if (cmd is not SqlCommand)
             {
                 throw new ArgumentException("Command must by of type OleDbCommand!");
             }
