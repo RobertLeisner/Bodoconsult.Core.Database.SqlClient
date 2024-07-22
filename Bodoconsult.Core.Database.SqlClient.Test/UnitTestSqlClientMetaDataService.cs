@@ -43,17 +43,17 @@ namespace Bodoconsult.Core.Database.SqlClient.Test
         public void TestGetMetaData()
         {
             // Assert
-            Assert.IsNull(_service.Table);
+            Assert.That(_service.Table, Is.Not.Null);
 
             // Act
             _service.GetMetaData(_conn, EntityName, Sql, PrimaryKeyField);
 
             // Assert
-            Assert.IsNotNull(_service.Table);
+            Assert.That(_service.Table, Is.Not.Null);
 
-            Assert.AreEqual(EntityName, _service.Table.Name);
+            Assert.That(_service.Table.Name, Is.EqualTo( EntityName) );
 
-            Assert.IsTrue(_service.Table.Fields.Any());
+            Assert.That(_service.Table.Fields.Any());
         }
 
 
@@ -71,32 +71,32 @@ namespace Bodoconsult.Core.Database.SqlClient.Test
         //    _service.GetMetaData(_conn, entityName, sql);
 
         //    // Assert
-        //    Assert.IsNotNull(_service.Table);
+        //    Assert.That(_service.Table);
 
         //    Assert.AreEqual(entityName, _service.Table.Name);
 
-        //    Assert.IsTrue(_service.Table.Fields.Any());
+        //    Assert.That(_service.Table.Fields.Any());
         //}
 
         [Test]
         public void TestCreateEntityClass()
         {
             // Assert
-            Assert.IsNull(_service.Table);
+            Assert.That(_service.Table,Is.Null);
 
             _service.GetMetaData(_conn, EntityName, Sql);
 
-            Assert.IsNotNull(_service.Table);
+            Assert.That(_service.Table, Is.Not.Null);
 
-            Assert.AreEqual(EntityName, _service.Table.Name);
+            Assert.That(_service.Table.Name, Is.EqualTo(EntityName));
 
-            Assert.IsTrue(_service.Table.Fields.Any());
+            Assert.That(_service.Table.Fields.Any());
 
             // Act
             var result = _service.CreateEntityClass();
 
             // Assert
-            Assert.IsFalse(string.IsNullOrEmpty(result));
+            Assert.That(string.IsNullOrEmpty(result), Is.EqualTo(false));
 
             Debug.Print(result);
         }
@@ -106,21 +106,21 @@ namespace Bodoconsult.Core.Database.SqlClient.Test
         public void TestCreateNewEntity()
         {
             // Assert
-            Assert.IsNull(_service.Table);
+            Assert.That(_service.Table, Is.Null);
 
             _service.GetMetaData(_conn, EntityName, Sql);
 
-            Assert.IsNotNull(_service.Table);
+            Assert.That(_service.Table, Is.Not.Null);
 
-            Assert.AreEqual(EntityName, _service.Table.Name);
+            Assert.That(_service.Table.Name, Is.EqualTo(EntityName));
 
-            Assert.IsTrue(_service.Table.Fields.Any());
+            Assert.That(_service.Table.Fields.Any());
 
             // Act
             var result = _service.CreateNewEntity();
 
             // Assert
-            Assert.IsFalse(string.IsNullOrEmpty(result));
+            Assert.That(string.IsNullOrEmpty(result), Is.EqualTo(false));
 
             Debug.Print(result);
         }
@@ -130,21 +130,21 @@ namespace Bodoconsult.Core.Database.SqlClient.Test
         public void TestCreateMappingFromDbToEntityForDataReader()
         {
             // Assert
-            Assert.IsNull(_service.Table);
+            Assert.That(_service.Table, Is.Not.Null);
 
             _service.GetMetaData(_conn, EntityName, Sql);
 
-            Assert.IsNotNull(_service.Table);
+            Assert.That(_service.Table, Is.Not.Null);
 
-            Assert.AreEqual(EntityName, _service.Table.Name);
+            Assert.That(_service.Table.Name, Is.EqualTo(EntityName));
 
-            Assert.IsTrue(_service.Table.Fields.Any());
+            Assert.That(_service.Table.Fields.Any());
 
             // Act
             var result = _service.CreateMappingFromDbToEntityForDataReader();
 
             // Assert
-            Assert.IsFalse(string.IsNullOrEmpty(result));
+            Assert.That(string.IsNullOrEmpty(result), Is.EqualTo(false));
 
             Debug.Print(result);
         }
@@ -153,21 +153,21 @@ namespace Bodoconsult.Core.Database.SqlClient.Test
         public void TestCreateNewEntityCommand()
         {
             // Assert
-            Assert.IsNull(_service.Table);
+            Assert.That(_service.Table, Is.Null);
 
             _service.GetMetaData(_conn, EntityName, Sql);
 
-            Assert.IsNotNull(_service.Table);
+            Assert.That(_service.Table, Is.Not.Null);
 
-            Assert.AreEqual(EntityName, _service.Table.Name);
+            Assert.That(_service.Table.Name, Is.EqualTo(EntityName));
 
-            Assert.IsTrue(_service.Table.Fields.Any());
+            Assert.That(_service.Table.Fields.Any());
 
             // Act
             var result = _service.CreateNewEntityCommand();
 
             // Assert
-            Assert.IsFalse(string.IsNullOrEmpty(result));
+            Assert.That(string.IsNullOrEmpty(result), Is.EqualTo(false));
 
             Debug.Print(result);
         }
@@ -177,21 +177,21 @@ namespace Bodoconsult.Core.Database.SqlClient.Test
         public void TestCreateUpdateEntityCommand()
         {
             // Assert
-            Assert.IsNull(_service.Table);
+            Assert.That(_service.Table, Is.Null);
 
             _service.GetMetaData(_conn, EntityName, Sql, PrimaryKeyField);
 
-            Assert.IsNotNull(_service.Table);
+            Assert.That(_service.Table, Is.Not.Null);
 
-            Assert.AreEqual(EntityName, _service.Table.Name);
+            Assert.That(_service.Table.Name, Is.EqualTo(EntityName));
 
-            Assert.IsTrue(_service.Table.Fields.Any());
+            Assert.That(_service.Table.Fields.Any());
 
             // Act
             var result = _service.CreateUpdateEntityCommand();
 
             // Assert
-            Assert.IsFalse(string.IsNullOrEmpty(result));
+            Assert.That(string.IsNullOrEmpty(result), Is.EqualTo(false));
 
             Debug.Print(result);
         }
@@ -201,21 +201,21 @@ namespace Bodoconsult.Core.Database.SqlClient.Test
         public void TestCreateDeleteEntityCommand()
         {
             // Assert
-            Assert.IsNull(_service.Table);
+            Assert.That(_service.Table, Is.Null);
 
             _service.GetMetaData(_conn, EntityName, Sql, PrimaryKeyField);
 
-            Assert.IsNotNull(_service.Table);
+            Assert.That(_service.Table, Is.Not.Null);
 
-            Assert.AreEqual(EntityName, _service.Table.Name);
+            Assert.That(_service.Table.Name, Is.EqualTo(EntityName));
 
-            Assert.IsTrue(_service.Table.Fields.Any());
+            Assert.That(_service.Table.Fields.Any());
 
             // Act
             var result = _service.CreateDeleteEntityCommand();
 
             // Assert
-            Assert.IsFalse(string.IsNullOrEmpty(result));
+            Assert.That(string.IsNullOrEmpty(result), Is.EqualTo(false));
 
             Debug.Print(result);
         }
@@ -225,21 +225,21 @@ namespace Bodoconsult.Core.Database.SqlClient.Test
         public void TestCreateEntityServiceClass()
         {
             // Assert
-            Assert.IsNull(_service.Table);
+            Assert.That(_service.Table, Is.Null);
 
             _service.GetMetaData(_conn, EntityName, Sql, PrimaryKeyField);
 
-            Assert.IsNotNull(_service.Table);
+            Assert.That(_service.Table, Is.Not.Null);
 
-            Assert.AreEqual(EntityName, _service.Table.Name);
+            Assert.That(_service.Table.Name, Is.EqualTo(EntityName));
 
-            Assert.IsTrue(_service.Table.Fields.Any());
+            Assert.That(_service.Table.Fields.Any());
 
             // Act
             var result = _service.CreateEntityServiceClass();
 
             // Assert
-            Assert.IsFalse(string.IsNullOrEmpty(result));
+            Assert.That(string.IsNullOrEmpty(result), Is.EqualTo(false));
 
             Debug.Print(result);
         }
@@ -248,21 +248,21 @@ namespace Bodoconsult.Core.Database.SqlClient.Test
         public void TestCreateGetAllEntitiesCommand()
         {
             // Assert
-            Assert.IsNull(_service.Table);
+            Assert.That(_service.Table, Is.Null);
 
             _service.GetMetaData(_conn, EntityName, Sql);
 
-            Assert.IsNotNull(_service.Table);
+            Assert.That(_service.Table, Is.Not.Null);
 
-            Assert.AreEqual(EntityName, _service.Table.Name);
+            Assert.That(_service.Table.Name, Is.EqualTo(EntityName));
 
-            Assert.IsTrue(_service.Table.Fields.Any());
+            Assert.That(_service.Table.Fields.Any());
 
             // Act
             var result = _service.CreateGetAllEntitiesCommand();
 
             // Assert
-            Assert.IsFalse(string.IsNullOrEmpty(result));
+            Assert.That(string.IsNullOrEmpty(result), Is.EqualTo(false));
 
             Debug.Print(result);
         }
@@ -271,21 +271,21 @@ namespace Bodoconsult.Core.Database.SqlClient.Test
         public void TestCreateCountCommand()
         {
             // Assert
-            Assert.IsNull(_service.Table);
+            Assert.That(_service.Table, Is.Null);
 
             _service.GetMetaData(_conn, EntityName, Sql);
 
-            Assert.IsNotNull(_service.Table);
+            Assert.That(_service.Table, Is.Not.Null);
 
-            Assert.AreEqual(EntityName, _service.Table.Name);
+            Assert.That(_service.Table.Name, Is.EqualTo(EntityName));
 
-            Assert.IsTrue(_service.Table.Fields.Any());
+            Assert.That(_service.Table.Fields.Any());
 
             // Act
             var result = _service.CreateCountCommand();
 
             // Assert
-            Assert.IsFalse(string.IsNullOrEmpty(result));
+            Assert.That(string.IsNullOrEmpty(result), Is.EqualTo(false));
 
             Debug.Print(result);
         }
@@ -294,21 +294,21 @@ namespace Bodoconsult.Core.Database.SqlClient.Test
         public void TestCreateGetByIdCommand()
         {
             // Assert
-            Assert.IsNull(_service.Table);
+            Assert.That(_service.Table, Is.Null);
 
             _service.GetMetaData(_conn, EntityName, Sql, PrimaryKeyField);
 
-            Assert.IsNotNull(_service.Table);
+            Assert.That(_service.Table, Is.Not.Null);
 
-            Assert.AreEqual(EntityName, _service.Table.Name);
+            Assert.That(_service.Table.Name, Is.EqualTo(EntityName));
 
-            Assert.IsTrue(_service.Table.Fields.Any());
+            Assert.That(_service.Table.Fields.Any());
 
             // Act
             var result = _service.CreateGetByIdCommand();
 
             // Assert
-            Assert.IsFalse(string.IsNullOrEmpty(result));
+            Assert.That(string.IsNullOrEmpty(result), Is.EqualTo(false));
 
             Debug.Print(result);
         }
@@ -317,21 +317,21 @@ namespace Bodoconsult.Core.Database.SqlClient.Test
         public void TestExport()
         {
             // Assert
-            Assert.IsNull(_service.Table);
+            Assert.That(_service.Table, Is.Null);
 
             _service.GetMetaData(_conn, EntityName, Sql, PrimaryKeyField);
 
-            Assert.IsNotNull(_service.Table);
+            Assert.That(_service.Table, Is.Not.Null);
 
-            Assert.AreEqual(EntityName, _service.Table.Name);
+            Assert.That(_service.Table.Name, Is.EqualTo(EntityName));
 
-            Assert.IsTrue(_service.Table.Fields.Any());
+            Assert.That(_service.Table.Fields.Any());
 
             // Act
             var result = _service.ExportAll(TargetPath);
 
             // Assert
-            Assert.IsTrue(result.Any());
+            Assert.That(result.Any());
 
             foreach (var fileName in result)
             {

@@ -35,7 +35,7 @@ namespace Bodoconsult.Core.Database.SqlClient.Test
             var erg = _db.TestConnection();
 
 
-            Assert.IsTrue(erg);
+            Assert.That(erg, Is.EqualTo(true));
         }
 
 
@@ -50,7 +50,7 @@ namespace Bodoconsult.Core.Database.SqlClient.Test
 
             var erg = _db.GetDataTable(sql);
 
-            Assert.IsTrue(erg.Rows.Count > 0);
+            Assert.That(erg.Rows.Count, Is.GreaterThan(0));
         }
 
 
@@ -75,7 +75,7 @@ namespace Bodoconsult.Core.Database.SqlClient.Test
             var erg = _db.GetDataTable(cmd);
 
 
-            Assert.IsTrue(erg.Rows.Count > 0);
+            Assert.That(erg.Rows.Count, Is.GreaterThan(0));
         }
 
 
@@ -97,8 +97,8 @@ namespace Bodoconsult.Core.Database.SqlClient.Test
             var erg = _db.GetDataTable(cmd);
 
 
-            Assert.IsTrue(erg.Rows.Count > 0);
-            Assert.IsTrue(erg.Rows.Count == 1);
+            Assert.That(erg.Rows.Count, Is.GreaterThan(0));
+            Assert.That(erg.Rows.Count, Is.EqualTo(1));
         }
 
         /// <summary>
@@ -116,7 +116,7 @@ namespace Bodoconsult.Core.Database.SqlClient.Test
             var erg = _db.GetDataTable(cmd);
 
 
-            Assert.IsTrue(erg.Rows.Count > 0);
+            Assert.That(erg.Rows.Count, Is.GreaterThan(0));
         }
 
 
@@ -131,7 +131,7 @@ namespace Bodoconsult.Core.Database.SqlClient.Test
 
             var erg = _db.GetDataReader(sql);
 
-            Assert.IsTrue(erg.FieldCount > 0);
+            Assert.That(erg.FieldCount, Is.GreaterThan(0));
         }
 
 
@@ -155,7 +155,7 @@ namespace Bodoconsult.Core.Database.SqlClient.Test
 
             var erg = _db.GetDataReader(cmd);
 
-            Assert.IsTrue(erg.FieldCount > 0);
+            Assert.That(erg.FieldCount, Is.GreaterThan(0));
         }
 
 
@@ -173,7 +173,7 @@ namespace Bodoconsult.Core.Database.SqlClient.Test
             // Add parameters here if required
             var erg = _db.GetDataReader(cmd);
 
-            Assert.IsTrue(erg.FieldCount > 0);
+            Assert.That(erg.FieldCount, Is.GreaterThan(0));
 
         }
 
@@ -195,8 +195,8 @@ namespace Bodoconsult.Core.Database.SqlClient.Test
             // Add parameters here if required
             var erg = _db.GetDataReader(cmd);
 
-            Assert.IsTrue(erg.FieldCount > 0);
-            Assert.IsTrue(erg.HasRows);
+            Assert.That(erg.FieldCount, Is.GreaterThan(0));
+            Assert.That(erg.HasRows, Is.EqualTo(true));
 
         }
 
@@ -247,8 +247,8 @@ namespace Bodoconsult.Core.Database.SqlClient.Test
 
             var result = _db.ExecWithResult(sql);
 
-            Assert.IsNotNull(result);
-            Assert.IsFalse(string.IsNullOrEmpty(result));
+            Assert.That(result, Is.Not.EqualTo(null));
+            Assert.That(string.IsNullOrEmpty(result), Is.EqualTo(false));
         }
 
 
@@ -273,8 +273,8 @@ namespace Bodoconsult.Core.Database.SqlClient.Test
 
             var result = _db.ExecWithResult(cmd);
 
-            Assert.IsNotNull(result);
-            Assert.IsFalse(string.IsNullOrEmpty(result));
+            Assert.That(result, Is.Not.EqualTo(null));
+            Assert.That(string.IsNullOrEmpty(result), Is.EqualTo(false));
         }
 
 
@@ -296,7 +296,7 @@ namespace Bodoconsult.Core.Database.SqlClient.Test
 
             var result = _db.ExecMultiple(commands);
 
-            Assert.IsTrue(result == 0);
+            Assert.That(result, Is.EqualTo(0));
         }
 
 
@@ -318,9 +318,11 @@ namespace Bodoconsult.Core.Database.SqlClient.Test
             var result = SqlClientConnManager.MapGeneralDbTypeToSqlDbType(inpuType);
 
             // Assert
-            Assert.AreEqual(expectedType, result);
+            Assert.That(result, Is.EqualTo(expectedType));
         }
 
+
+        
 
     }
 }

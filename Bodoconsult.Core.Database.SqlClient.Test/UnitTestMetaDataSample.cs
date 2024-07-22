@@ -28,8 +28,8 @@ namespace Bodoconsult.Core.Database.SqlClient.Test
             var result = _db.GetAll();
 
             // Assert
-            Assert.IsNotNull(result);
-            Assert.IsTrue(result.Any());
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Any());
 
         }
 
@@ -43,9 +43,9 @@ namespace Bodoconsult.Core.Database.SqlClient.Test
             var result = _db.GetById(id);
 
             // Assert
-            Assert.IsNotNull(result);
+            Assert.That(result, Is.Not.Null);
 
-            Assert.AreEqual(id, result.CustomerId);
+            Assert.That(result.CustomerId, Is.EqualTo(id));
         }
 
         [Test]
@@ -56,7 +56,7 @@ namespace Bodoconsult.Core.Database.SqlClient.Test
             var result = _db.Count();
 
             // Assert
-            Assert.IsTrue(result > 0);
+            Assert.That(result > 0);
 
         }
 
@@ -80,8 +80,8 @@ namespace Bodoconsult.Core.Database.SqlClient.Test
             // Assert
             var result = _db.GetById(id);
 
-            Assert.IsNotNull(result);
-            Assert.AreEqual(newName, result.LastName);
+            Assert.That(result, Is.Not.Null);
+            Assert.That(newName, Is.EqualTo(result.LastName));
 
         }
 
@@ -100,8 +100,8 @@ namespace Bodoconsult.Core.Database.SqlClient.Test
             // Assert
             var result = _db.GetById(id);
 
-            Assert.IsNotNull(result);
-            Assert.AreEqual(customer.LastName, result.LastName);
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.LastName, Is.EqualTo(customer.LastName));
 
         }
 
@@ -115,7 +115,7 @@ namespace Bodoconsult.Core.Database.SqlClient.Test
             _db.Delete(id);
 
             // Assert
-            Assert.IsTrue(true);
+            Assert.That(true);
 
         }
     }
